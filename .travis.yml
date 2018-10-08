@@ -2,19 +2,20 @@ language: java
 script: mvn integration-test -Dmaven.javadoc.skip=true --settings=.settings.xml -DredirectTestOutput=false
 install: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V --settings=.settings.xml -DredirectTestOutput=false
 
-jdk:
-  - oraclejdk8
+dist: trusty
 
 sudo: false
-addons:
-  apt:
-    packages:
-      - oracle-java8-installer
 
-notifications:
-  email:
-    recipients:
-      stuart.w.douglas@gmail.com
+matrix:
+  include:
+  - jdk: openjdk8
+  - jdk: openjdk9
+  - jdk: openjdk10
+  - jdk: openjdk11
+  - jdk: openjdk-ea
+  - jdk: oraclejdk8
+  - jdk: oraclejdk11
+
       
 cache:
   directories:
